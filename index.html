@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- ███ САЙТ stt-navigator.com · загружать ТОЛЬКО в репозиторий 7777kpd/stt-landing · НЕ в stt-app ███ -->
 <html lang="ru">
 <head>
 <meta charset="utf-8">
@@ -184,7 +185,7 @@ section{scroll-margin-top:64px}
 </figure>
 <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:36px">
 <p style="font-size:clamp(18px,2vw,22px);font-weight:700;margin:0;max-width:560px">Так ассистент покажет вашу компанию — на ваших данных.</p>
-<a class="btn btn-main" href="#start" data-link="trial">Подключить ИИ-ассистента</a>
+<a class="btn btn-main" href="#start" data-link="trial" data-src="demo">Подключить ИИ-ассистента</a>
 </div>
 </section>
 
@@ -342,7 +343,7 @@ section{scroll-margin-top:64px}
 <div style="width:100%;max-width:1120px;background:#2C2A26;color:#F0EADC;border-radius:36px;padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px);display:flex;flex-direction:column;align-items:center;gap:20px">
 <h2 class="h" style="color:#F0EADC">Узнайте свою систему продаж<br><span style="color:#8B8578">и её потенциал.</span></h2>
 <p class="lead" style="color:#B9B2A3">На своих данных. Бесплатно.</p>
-<a class="btn" style="background:#F0EADC;color:#2C2A26;margin-top:8px" href="#start" data-link="trial">Подключить ИИ-ассистента</a>
+<a class="btn" style="background:#F0EADC;color:#2C2A26;margin-top:8px" href="#start" data-link="trial" data-src="final-top">Подключить ИИ-ассистента</a>
 </div>
 <div style="display:flex;gap:12px;flex-wrap:wrap;width:100%;max-width:1120px;margin-top:8px">
 <div style="flex:1 1 200px;background:#FFFFFF;color:#2C2A26;border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:6px;text-align:left"><span style="font-size:13px;font-weight:800;color:#8B8578">1</span><span style="font-size:19px;font-weight:800;line-height:1.2">Оставьте заявку</span><span style="font-size:14px;line-height:1.45;color:#6B665B">Три поля — и менеджер свяжется с вами, чтобы подключить.</span></div>
@@ -351,7 +352,7 @@ section{scroll-margin-top:64px}
 <div style="flex:1 1 200px;background:#2C2A26;color:#F0EADC;border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:6px;text-align:left"><span style="font-size:13px;font-weight:800;color:#7FC08F">4</span><span style="font-size:19px;font-weight:800;line-height:1.2">Экспертный вывод</span><span style="font-size:14px;line-height:1.45;color:#B9B2A3">Бесплатно. И разбор с экспертом, если захотите.</span></div>
 </div>
 <a href="#start" data-link="noTelegram" hidden style="margin-top:4px;font-size:15px;font-weight:700;color:#6B665B">Нет Telegram? Оставьте контакт — подключит менеджер</a>
-<a class="btn btn-main" style="margin-top:16px" href="#start" data-link="trial">Оставить заявку</a>
+<a class="btn btn-main" style="margin-top:16px" href="#start" data-link="trial" data-src="final-bottom">Оставить заявку</a>
 <div style="display:flex;align-items:center;gap:10px;margin:32px 0 0;font-size:14px;color:#8B8578"><img src="logo.webp" alt="" style="width:32px;height:32px;border-radius:50%"><span>СТТ-Навигатор · © 2026 Дорощук Консалтинг</span></div>
 </section>
 
@@ -428,8 +429,9 @@ document.addEventListener('click', e => {
   if (/^(open[NCS]|back|openKolos|openRom|ptBack|toggleAlert|toggleFocus|tap[VKD]|svBack)$/.test(el.dataset.click)) { document.querySelectorAll('.phone *').forEach(x => { if (x.scrollTop > 0) x.scrollTop = 0; }); }
   if (/^go(Lead|Sv|Ag)$/.test(el.dataset.click) && window.innerWidth < 600) { const ph = document.querySelector('.phone'); if (ph) ph.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 });
-document.querySelectorAll('[data-link]').forEach(a => { const u = LINKS[a.dataset.link]; if (u) a.href = u; if (/^https?:/.test(u)) { a.target = '_blank'; a.rel = 'noopener'; } });
+document.querySelectorAll('[data-link]').forEach(a => { let u = LINKS[a.dataset.link]; if (u && a.dataset.src) u = u.replace(/source=[^&]*/, 'source=' + a.dataset.src); if (u) a.href = u; if (/^https?:/.test(u)) { a.target = '_blank'; a.rel = 'noopener'; } });
 render();
 </script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "82b7819239cc4ce8b13aeffe89c755a4"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
