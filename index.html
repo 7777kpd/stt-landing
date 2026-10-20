@@ -429,7 +429,47 @@ document.addEventListener('click', e => {
   if (/^(open[NCS]|back|openKolos|openRom|ptBack|toggleAlert|toggleFocus|tap[VKD]|svBack)$/.test(el.dataset.click)) { document.querySelectorAll('.phone *').forEach(x => { if (x.scrollTop > 0) x.scrollTop = 0; }); }
   if (/^go(Lead|Sv|Ag)$/.test(el.dataset.click) && window.innerWidth < 600) { const ph = document.querySelector('.phone'); if (ph) ph.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 });
-document.querySelectorAll('[data-link]').forEach(a => { let u = LINKS[a.dataset.link]; if (u && a.dataset.src) u = u.replace(/source=[^&]*/, 'source=' + a.dataset.src); if (u) a.href = u; if (/^https?:/.test(u)) { a.target = '_blank'; a.rel = 'noopener'; } });
+/* ===== 20.10.2026: статистика сайта — визит и нажатия «Подключить» уходят в бэкенд СТТ (утренний отчёт в Telegram) ===== */
+const SITE_API = new URLSearchParams(location.search).get('dev') === '1'
+  ? 'https://develop-production-0a2d.up.railway.app'
+  : 'https://upload.stt-navigator.com';
+function ssGet(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+function ssSet(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+function siteSrc() {
+  const q = new URLSearchParams(location.search).get('src');
+  if (q) { ssSet('stt_src', q); return q; }
+  const saved = ssGet('stt_src');
+  if (saved) return saved;
+  let src = 'direct';
+  try {
+    if (document.referrer) {
+      const h = new URL(document.referrer).hostname.replace(/^www\./, '');
+      if (h === location.hostname) src = 'direct';
+      else if (/chatgpt|openai|perplexity|claude\.ai|gemini|copilot|deepseek/.test(h)) src = 'ai';
+      else if (/(^|\.)t\.me$|telegram/.test(h)) src = 'tg';
+      else if (/instagram/.test(h)) src = 'insta';
+      else if (/youtube|youtu\.be/.test(h)) src = 'yt';
+      else if (/facebook|fb\.com/.test(h)) src = 'fb';
+      else if (/linkedin|lnkd/.test(h)) src = 'li';
+      else if (/google\.|bing\.|yandex\.|duckduckgo|ecosia/.test(h)) src = 'search';
+      else src = 'site:' + h;
+    }
+  } catch (e) {}
+  ssSet('stt_src', src);
+  return src;
+}
+const SRC = siteSrc();
+let SID = ssGet('stt_sid');
+if (!SID) { SID = Math.random().toString(36).slice(2, 12) + Date.now().toString(36); ssSet('stt_sid', SID); }
+function siteBeacon(k, btn) {
+  if (location.protocol === 'file:') return;
+  const body = JSON.stringify({ k, src: SRC, btn: btn || null, sid: SID });
+  try { if (navigator.sendBeacon && navigator.sendBeacon(SITE_API + '/api/site/event', body)) return; } catch (e) {}
+  try { fetch(SITE_API + '/api/site/event', { method: 'POST', body, keepalive: true, mode: 'no-cors' }); } catch (e) {}
+}
+siteBeacon('visit');
+document.addEventListener('click', e => { const a = e.target.closest('a[data-src]'); if (a) siteBeacon('click', a.dataset.src); }, true);
+document.querySelectorAll('[data-link]').forEach(a => { let u = LINKS[a.dataset.link]; if (u && a.dataset.src) u = u.replace(/source=[^&]*/, 'source=' + a.dataset.src) + '&channel=' + encodeURIComponent(SRC); if (u) a.href = u; if (/^https?:/.test(u)) { a.target = '_blank'; a.rel = 'noopener'; } });
 render();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "82b7819239cc4ce8b13aeffe89c755a4"}'></script><!-- End Cloudflare Web Analytics -->
