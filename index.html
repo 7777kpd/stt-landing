@@ -37,6 +37,18 @@ a{color:#3B7DDB}a:hover{color:#2A63B5}
 .soft-ink{color:#8B8578}
 .card{background:#FFFFFF;border:1px solid #ECE6D8;border-radius:24px}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 30px;border-radius:999px;font:700 18px 'Onest',sans-serif;text-decoration:none;border:none;cursor:pointer}
+.btn-wa,.btn-tg{border-radius:10px;min-height:60px;padding:0 26px 0 12px;gap:16px;font-size:16px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;justify-content:flex-start}
+.btn .ic{width:40px;height:40px;border-radius:8px;display:grid;place-items:center;flex:none}
+.btn-wa{background:#2C2A26;color:#F0EADC}.btn-wa:hover{background:#45413A;color:#F0EADC}.btn-wa .ic{background:#45413A;color:#D98A3D}
+.btn-tg{background:transparent;color:#2C2A26;box-shadow:inset 0 0 0 1.5px #2C2A26}.btn-tg:hover{background:#fff;color:#2C2A26}.btn-tg .ic{background:#E2D7C3;color:#8A5A2B}
+#start > div:first-child .btn-wa{background:#F0EADC;color:#2C2A26}#start > div:first-child .btn-wa:hover{background:#fff}#start > div:first-child .btn-wa .ic{background:#E2D7C3;color:#8A5A2B}
+#start > div:first-child .btn-tg{color:#F0EADC;box-shadow:inset 0 0 0 1.5px #D98A3D}#start > div:first-child .btn-tg:hover{background:#45413A;color:#F0EADC}#start > div:first-child .btn-tg .ic{background:#45413A;color:#D98A3D}
+.msg-ico .btn{min-height:44px;width:44px;padding:0;border-radius:10px;justify-content:center}.msg-ico .btn .ic{background:none;width:auto;height:auto}
+.msg-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.msg-btns .btn{min-width:200px}
+.msg-ico{display:flex;gap:8px}
+.msg-note{font-size:14px;color:#8B8578;font-weight:600;margin:0}
+@media (max-width:480px){.msg-btns{width:100%}.msg-btns .btn{flex:1 1 100%}}
 .btn-main{background:#2C2A26;color:#F0EADC}.btn-main:hover{background:#45413A;color:#F0EADC}
 section{scroll-margin-top:64px}
 @keyframes tapPulse{0%{box-shadow:0 0 0 0 rgba(59,125,219,.6)}70%{box-shadow:0 0 0 9px rgba(59,125,219,0)}100%{box-shadow:0 0 0 0 rgba(59,125,219,0)}}
@@ -71,7 +83,7 @@ section{scroll-margin-top:64px}
 <main style="width:100%;overflow-x:clip">
 <header style="position:sticky;top:0;z-index:20;background:#F0EADC;border-bottom:1px solid #E2D7C3;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px clamp(16px,4vw,48px)">
 <span style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;letter-spacing:-.01em"><img src="logo.webp" alt="STT Navigator" style="width:40px;height:40px;border-radius:50%"><span style="display:flex;flex-direction:column;line-height:1.1">STT Navigator<span style="font-size:12.5px;font-weight:700;color:#2E8A52;letter-spacing:0">ИИ для дистрибуции</span></span></span>
-<a class="btn btn-main" style="min-height:44px;padding:0 20px;font-size:15px" href="#start" data-link="connect">Подключить</a>
+<div class="msg-ico"><a class="btn btn-wa" href="#start" data-link="wa" data-src="header-wa" aria-label="Написать в WhatsApp"><i class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke-width="2.6"/></svg></i></a><a class="btn btn-tg" href="#start" data-link="tg" data-src="header-tg" aria-label="Написать в Telegram"><i class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/><path d="M21 3 10 13"/></svg></i></a></div>
 </header>
 
 <!-- 1. HERO -->
@@ -92,7 +104,6 @@ section{scroll-margin-top:64px}
 <figcaption style="font-size:15px;font-weight:800;color:#2C2A26;text-align:center">Результат — продажи и прибыль</figcaption></figure>
 </div>
 <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:12px">
-<a class="btn btn-main" href="#start" data-link="connect">Подключить ИИ-ассистента</a>
 <a class="btn btn-line" href="#try">Как это работает</a>
 </div>
 </section>
@@ -220,7 +231,7 @@ section{scroll-margin-top:64px}
 </figure>
 <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:36px">
 <p style="font-size:clamp(18px,2vw,22px);font-weight:700;margin:0;max-width:560px">Так ассистент покажет вашу компанию — на ваших данных.</p>
-<a class="btn btn-main" href="#start" data-link="trial" data-src="demo">Подключить ИИ-ассистента</a>
+<div class="msg-btns"><a class="btn btn-wa" href="#start" data-link="wa" data-src="demo-wa"><i class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke-width="2.6"/></svg></i><span>WhatsApp</span></a><a class="btn btn-tg" href="#start" data-link="tg" data-src="demo-tg"><i class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/><path d="M21 3 10 13"/></svg></i><span>Telegram</span></a></div>
 </div>
 </section>
 
@@ -379,22 +390,25 @@ section{scroll-margin-top:64px}
 <div style="width:100%;max-width:1120px;background:#2C2A26;color:#F0EADC;border-radius:36px;padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px);display:flex;flex-direction:column;align-items:center;gap:20px">
 <h2 class="h" style="color:#F0EADC">Узнайте, кто из клиентов в вашей системе.<br><span style="color:#8B8578">И приведите остальных.</span></h2>
 <p class="lead" style="color:#B9B2A3">На своих данных. Бесплатно.</p>
-<a class="btn" style="background:#F0EADC;color:#2C2A26;margin-top:8px" href="#start" data-link="trial" data-src="final-top">Подключить ИИ-ассистента</a>
+<div style="margin-top:8px"><div class="msg-btns"><a class="btn btn-wa" href="#start" data-link="wa" data-src="final-top-wa"><i class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke-width="2.6"/></svg></i><span>WhatsApp</span></a><a class="btn btn-tg" href="#start" data-link="tg" data-src="final-top-tg"><i class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/><path d="M21 3 10 13"/></svg></i><span>Telegram</span></a></div></div>
 </div>
 <div style="display:flex;gap:12px;flex-wrap:wrap;width:100%;max-width:1120px;margin-top:8px">
-<div style="flex:1 1 200px;background:#FFFFFF;color:#2C2A26;border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:6px;text-align:left"><span style="font-size:13px;font-weight:800;color:#8B8578">1</span><span style="font-size:19px;font-weight:800;line-height:1.2">Оставьте заявку</span><span style="font-size:14px;line-height:1.45;color:#6B665B">Три поля — и менеджер свяжется с вами, чтобы подключить.</span></div>
+<div style="flex:1 1 200px;background:#FFFFFF;color:#2C2A26;border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:6px;text-align:left"><span style="font-size:13px;font-weight:800;color:#8B8578">1</span><span style="font-size:19px;font-weight:800;line-height:1.2">Напишите нам</span><span style="font-size:14px;line-height:1.45;color:#6B665B">В WhatsApp или Telegram — покажем, как это работает на ваших данных.</span></div>
 <div style="flex:1 1 200px;background:#FFFFFF;color:#2C2A26;border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:6px;text-align:left"><span style="font-size:13px;font-weight:800;color:#8B8578">2</span><span style="font-size:19px;font-weight:800;line-height:1.2">Загрузите два прошлых месяца</span><span style="font-size:14px;line-height:1.45;color:#6B665B">Структура, план посещений, заказы. До 50 человек.</span></div>
 <div style="flex:1 1 200px;background:#FFFFFF;color:#2C2A26;border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:6px;text-align:left"><span style="font-size:13px;font-weight:800;color:#8B8578">3</span><span style="font-size:19px;font-weight:800;line-height:1.2">Итоги месяца</span><span style="font-size:14px;line-height:1.45;color:#6B665B">Директорский уровень, сравнение двух месяцев.</span></div>
 <div style="flex:1 1 200px;background:#2C2A26;color:#F0EADC;border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:6px;text-align:left"><span style="font-size:13px;font-weight:800;color:#7FC08F">4</span><span style="font-size:19px;font-weight:800;line-height:1.2">Экспертный вывод</span><span style="font-size:14px;line-height:1.45;color:#B9B2A3">Бесплатно. И разбор с экспертом, если захотите.</span></div>
 </div>
-<a href="#start" data-link="noTelegram" hidden style="margin-top:4px;font-size:15px;font-weight:700;color:#6B665B">Нет Telegram? Оставьте контакт — подключит менеджер</a>
-<a class="btn btn-main" style="margin-top:16px" href="#start" data-link="trial" data-src="final-bottom">Оставить заявку</a>
+<div style="margin-top:16px"><div class="msg-btns"><a class="btn btn-wa" href="#start" data-link="wa" data-src="final-bottom-wa"><i class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke-width="2.6"/></svg></i><span>WhatsApp</span></a><a class="btn btn-tg" href="#start" data-link="tg" data-src="final-bottom-tg"><i class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/><path d="M21 3 10 13"/></svg></i><span>Telegram</span></a></div></div>
 <div style="display:flex;align-items:center;gap:10px;margin:32px 0 0;font-size:14px;color:#8B8578"><img src="logo.webp" alt="" style="width:32px;height:32px;border-radius:50%"><span>STT Navigator · © 2026 Дорощук Консалтинг</span></div>
 </section>
 
 </main>
 <script>
 /* ===== Ссылки: заменить, когда будут готовы ===== */
+/* 16.11.2026: вместо формы — WhatsApp и Telegram. Вписать свой номер (только цифры, с кодом страны) и username */
+const WA_PHONE = '4367762009510';
+const TG_USER  = 'DoroshchukConsulting';
+const MSG_TEXT = 'Здравствуйте! Хочу увидеть, как STT Navigator работает на моих данных.';
 const LINKS = {
   connect: '#start',                                   // кнопки в шапке и на первом экране — ведут к финалу
   trial: 'https://tally.so/r/dWRGay?source=stt-navigator',     // кнопка в финале; этап 2: 'https://t.me/<бот>?start=trial'
@@ -533,6 +547,14 @@ function demoMark(name) {
   });
 }
 document.addEventListener('click', e => { const a = e.target.closest('a[data-src]'); if (a) siteBeacon('click', a.dataset.src); }, true);
+document.querySelectorAll('[data-link="wa"],[data-link="tg"]').forEach(a => {
+  const text = MSG_TEXT + ' (сайт · ' + SRC + ')';   // источник виден менеджеру в первом сообщении
+  a.href = a.dataset.link === 'wa'
+    ? 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(text)
+    : 'https://t.me/' + TG_USER + '?text=' + encodeURIComponent(text);
+  a.target = '_blank'; a.rel = 'noopener';
+  a.removeAttribute('data-link');
+});
 document.querySelectorAll('[data-link]').forEach(a => { let u = LINKS[a.dataset.link]; if (u && a.dataset.src) u = u.replace(/source=[^&]*/, 'source=' + a.dataset.src) + '&channel=' + encodeURIComponent(SRC); if (u) a.href = u; if (/^https?:/.test(u)) { a.target = '_blank'; a.rel = 'noopener'; } });
 render();
 </script>
